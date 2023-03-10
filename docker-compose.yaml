@@ -28,3 +28,17 @@ services:
         [ "/app/wait.sh", "redis:6379", "--", "/app/start.sh"]
     command:
       - "/app/main"
+  chat1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    networks:
+      - app-tier
+    depends_on:
+      - redis
+    entrypoint:
+      [ "/app/wait.sh", "redis:6379", "--", "/app/start.sh" ]
+    command:
+      - "/app/main"

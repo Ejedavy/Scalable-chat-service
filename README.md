@@ -35,10 +35,8 @@ The `command` field can be one of "SendMessage", "Subscribe" or "Unsubscribe". T
 
 ## Testing Horizontal Scalability
 
-To test the horizontal scalability of the server, build the Docker image from the Dockerfile and run the container, binding port 8081 and joining the network "app-tier". The following commands can be used:
-
-`docker build -t chat-server .`<br>
-`docker run -p 8081:8080 --network app-tier chat-server`
+To test the horizontal scalability, create another session on your websocket client, signup and login using `localhost:8081` and establish a websocket connection on `ws://localhost:8081?OTP="otp"`.
+Keeping the two websocket sessions active, try sending messages.
 
 
 ## Conclusion
