@@ -1,10 +1,13 @@
 version: '3.8'
 services:
   redis:
-    image: redis:6.2-alpine
+    image: bitnami/redis:latest
     restart: always
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+
     ports:
-      - "9090:6379"
+       - "6379:6379"
   chat:
     build:
       context: .
@@ -14,5 +17,6 @@ services:
     depends_on:
         - redis
     entrypoint:
-        [ "/app/wait.sh", "--", "redis:9090"]
-    command: [ "/app/main" ]
+        [ "/app/wait.sh", "redis:6379", "--", "/app/start.sh"]
+    command:
+      - "/app/main"

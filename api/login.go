@@ -12,6 +12,7 @@ import (
 )
 
 func (s *Server) LoginHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Login Called")
 	var data AuthBody
 	json.NewDecoder(r.Body).Decode(&data)
 	username := data.Username
